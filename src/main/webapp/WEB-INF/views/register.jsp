@@ -45,11 +45,11 @@
 
 		<div class="row">
 			<div class="form-group col-md-12">
-				<label class="col-md-3 control-lable" for="ssoId">Login</label>
+				<label class="col-md-3 control-lable" for="username">Login</label>
 				<div class="col-md-7">
-					<form:input type="text" path="ssoId" id="ssoId" class="form-control input-sm"/>
+					<form:input type="text" path="username" id="username" class="form-control input-sm"/>
 					<div class="has-error">
-						<form:errors path="ssoId" class="help-inline"/>
+						<form:errors path="username" class="help-inline"/>
 					</div>
 				</div>
 			</div>
