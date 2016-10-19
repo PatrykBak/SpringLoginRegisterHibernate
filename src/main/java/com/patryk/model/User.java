@@ -17,40 +17,40 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name="APP_USER")
+@Table(name = "APP_USER")
 public class User {
 
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@NotEmpty
-	@Column(name="SSO_ID", unique=true, nullable=false)
-	private String ssoId;
-	
+	@Column(name = "USERNAME", unique = true, nullable = false)
+	private String username;
+
 	@NotEmpty
-	@Column(name="PASSWORD", nullable=false)
+	@Column(name = "PASSWORD", nullable = false)
 	private String password;
-		
+
 	@NotEmpty
-	@Column(name="FIRST_NAME", nullable=false)
+	@Column(name = "FIRST_NAME", nullable = false)
 	private String firstName;
 
 	@NotEmpty
-	@Column(name="LAST_NAME", nullable=false)
+	@Column(name = "LAST_NAME", nullable = false)
 	private String lastName;
 
 	@NotEmpty
-	@Column(name="EMAIL", nullable=false)
+	@Column(name = "EMAIL", nullable = false)
 	private String email;
 
 	@NotEmpty
-	@Column(name="STATE", nullable=false)
-	private String state=State.ACTIVE.getState();
+	@Column(name = "STATE", nullable = false)
+	private String state = State.ACTIVE.getState();
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "APP_USER_USER_PROFILE", 
-             joinColumns = { @JoinColumn(name = "USER_ID") }, 
-             inverseJoinColumns = { @JoinColumn(name = "USER_PROFILE_ID") })
+	@JoinTable(name = "APP_USER_USER_PROFILE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = {
+			@JoinColumn(name = "USER_PROFILE_ID") })
 	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
 
 	public int getId() {
@@ -61,12 +61,12 @@ public class User {
 		this.id = id;
 	}
 
-	public String getSsoId() {
-		return ssoId;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setSsoId(String ssoId) {
-		this.ssoId = ssoId;
+	public void setUsername(String ssoId) {
+		this.username = ssoId;
 	}
 
 	public String getPassword() {
@@ -122,7 +122,7 @@ public class User {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + id;
-		result = prime * result + ((ssoId == null) ? 0 : ssoId.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
 
@@ -137,20 +137,19 @@ public class User {
 		User other = (User) obj;
 		if (id != other.id)
 			return false;
-		if (ssoId == null) {
-			if (other.ssoId != null)
+		if (username == null) {
+			if (other.username != null)
 				return false;
-		} else if (!ssoId.equals(other.ssoId))
+		} else if (!username.equals(other.username))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", ssoId=" + ssoId + ", password=" + password
-				+ ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", email=" + email + ", state=" + state + ", userProfiles=" + userProfiles +"]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", email=" + email + ", state=" + state + ", userProfiles=" + userProfiles
+				+ "]";
 	}
 
-	
 }

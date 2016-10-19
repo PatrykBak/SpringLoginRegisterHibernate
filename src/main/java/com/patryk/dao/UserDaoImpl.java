@@ -19,7 +19,7 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 
 	public User findBySSO(String sso) {
 		Criteria crit = createEntityCriteria();
-		crit.add(Restrictions.eq("ssoId", sso));
+		crit.add(Restrictions.eq("username", sso));
 		return (User) crit.uniqueResult();
 	}
 
