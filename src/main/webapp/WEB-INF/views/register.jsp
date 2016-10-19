@@ -6,7 +6,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>User Registration Form</title>
+	<title>Registration Form</title>
 	<link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"></link>
 	<link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
 </head>
@@ -15,7 +15,7 @@
 
  	<div class="form-container">
  	
- 	<h1>New User Registration Form</h1>
+ 	<h1>Registration Form</h1>
  	
 	<form:form method="POST" modelAttribute="user" class="form-horizontal">
 
@@ -81,7 +81,7 @@
 
 		<div class="row">
 			<div class="form-actions floatRight">
-				<input type="submit" value="Register" class="btn btn-primary btn-sm"></a>
+				<input type="submit" value="Register" class="btn btn-primary btn-sm">
 			</div>
 		</div>
 	</form:form>

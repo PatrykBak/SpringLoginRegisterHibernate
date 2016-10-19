@@ -10,7 +10,7 @@
 <body>
 	<div class="success">
 		Greeting : ${greeting}
-		This is a welcome page.
+		This is a welcome page for logged user.
 	</div>
 </body>
 </html>

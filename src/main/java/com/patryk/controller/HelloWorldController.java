@@ -32,10 +32,15 @@ public class HelloWorldController {
 	@Autowired
 	UserService userService;
 
-	@RequestMapping(value = { "/", "/home", "/index" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
-		model.addAttribute("greeting", "Hi, Welcome to mysite");
-		return "welcome";
+		return "index";
+	}
+
+	@RequestMapping(value = { "/logged" }, method = RequestMethod.GET)
+	public String loggedPage(ModelMap model) {
+		model.addAttribute("user", getPrincipal());
+		return "logged";
 	}
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
@@ -44,7 +49,7 @@ public class HelloWorldController {
 		return "admin";
 	}
 
-	@RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
+	@RequestMapping(value = "/accessDenied", method = RequestMethod.GET)
 	public String accessDeniedPage(ModelMap model) {
 		model.addAttribute("user", getPrincipal());
 		return "accessDenied";
@@ -128,10 +133,11 @@ public class HelloWorldController {
 			}
 		}
 
-		//model.addAttribute("success", "User " + user.getFirstName() + " has been registered successfully");
+		// model.addAttribute("success", "User " + user.getFirstName() + " has
+		// been registered successfully");
 		return "login";
 	}
-	
+
 	private String getPrincipal() {
 		String userName = null;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
