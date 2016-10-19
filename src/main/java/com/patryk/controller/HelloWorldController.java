@@ -32,7 +32,7 @@ public class HelloWorldController {
 	@Autowired
 	UserService userService;
 
-	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "/home", "/index" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
 		model.addAttribute("greeting", "Hi, Welcome to mysite");
 		return "welcome";
@@ -42,12 +42,6 @@ public class HelloWorldController {
 	public String adminPage(ModelMap model) {
 		model.addAttribute("user", getPrincipal());
 		return "admin";
-	}
-
-	@RequestMapping(value = "/db", method = RequestMethod.GET)
-	public String dbaPage(ModelMap model) {
-		model.addAttribute("user", getPrincipal());
-		return "dba";
 	}
 
 	@RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
@@ -106,6 +100,38 @@ public class HelloWorldController {
 		return "registrationsuccess";
 	}
 
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String newRegister(ModelMap model) {
+		User user = new User();
+		model.addAttribute("user", user);
+		return "register";
+	}
+
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String saveRegister(@Valid User user, BindingResult result, ModelMap model) {
+
+		if (result.hasErrors()) {
+			System.out.println("There are errors");
+			return "newuser";
+		}
+		userService.save(user);
+
+		System.out.println("First Name : " + user.getFirstName());
+		System.out.println("Last Name : " + user.getLastName());
+		System.out.println("Login : " + user.getSsoId());
+		System.out.println("Password : " + user.getPassword());
+		System.out.println("Email : " + user.getEmail());
+		System.out.println("Checking UsrProfiles....");
+		if (user.getUserProfiles() != null) {
+			for (UserProfile profile : user.getUserProfiles()) {
+				System.out.println("Profile : " + profile.getType());
+			}
+		}
+
+		//model.addAttribute("success", "User " + user.getFirstName() + " has been registered successfully");
+		return "login";
+	}
+	
 	private String getPrincipal() {
 		String userName = null;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
