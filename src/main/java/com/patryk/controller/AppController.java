@@ -24,7 +24,7 @@ import com.patryk.service.UserProfileService;
 import com.patryk.service.UserService;
 
 @Controller
-public class HelloWorldController {
+public class AppController {
 
 	@Autowired
 	UserProfileService userProfileService;
@@ -32,7 +32,7 @@ public class HelloWorldController {
 	@Autowired
 	UserService userService;
 
-	@RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "/index", "/home" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
 		return "index";
 	}
