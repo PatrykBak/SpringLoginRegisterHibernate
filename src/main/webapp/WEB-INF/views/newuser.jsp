@@ -4,113 +4,137 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
-
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>User Registration Form</title>
-<link href="<c:url value='/static/css/bootstrap.css' />"
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New User form</title>
+<link href="<c:url value='static/css/bootstrap.min.css' />"
 	rel="stylesheet"></link>
-<link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
+<link href="<c:url value='static/css/navbar.css' />" rel="stylesheet"></link>
+<script type="text/javascript">
+	function validateEmail(email) {
+		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		return re.test(email);
+	}
+	function dovalidations() {
+		$("#result").text("");
+		var username = document.getElementById("username").value;
+		if (parseInt(username.length) < 4) {
+			$("#result").text("Username must be at least 4 chars");
+			return false;
+		}
+		var password = document.getElementById("password").value;
+		if (parseInt(password.length) < 4) {
+			$("#result").text("Password must be at least 4 chars");
+			return false;
+		}
+
+		var email = document.getElementById("email").value;
+		if (validateEmail(email)) {
+		} else {
+			$("#result").text(email + " is not valid e-mail");
+			return false;
+		}
+
+		var roles = document.getElementById("roles").value;
+		if (roles == "") {
+			$("#result").text("Select at least one role.");
+			return false;
+		}
+		return true;
+	}
+</script>
 </head>
-
 <body>
+	<div class="container">
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+						aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Top of page</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="<c:url value="/index" />">Home</a></li>
+						<li class="active"><a href="<c:url value="/logged" />">User</a></li>
+						<li class="active"><a href="<c:url value="/admin" />">Admin</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="<c:url value="/logout" />">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="jumbotron">
+			<div class="form-container">
+				<h2>New User Registration Form</h2>
+				<br>
+				<p id='result'></p>
+				<form:form method="POST" modelAttribute="user"
+					class="form-horizontal" onsubmit="return dovalidations()">
 
-	<div class="form-container">
-
-		<h1>New User Registration Form</h1>
-
-		<form:form method="POST" modelAttribute="user" class="form-horizontal">
-
-			<div class="row">
-				<div class="form-group col-md-12">
-					<label class="col-md-3 control-lable" for="firstName">First
-						Name</label>
-					<div class="col-md-7">
-						<form:input type="text" path="firstName" id="firstName"
-							class="form-control input-sm" />
-						<div class="has-error">
-							<form:errors path="firstName" class="help-inline" />
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label class="col-md-3 control-lable" for="ssoId">Username</label>
+							<div class="col-md-7">
+								<form:input type="text" path="username" id="username"
+									class="form-control input-sm" />
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
 
-			<div class="row">
-				<div class="form-group col-md-12">
-					<label class="col-md-3 control-lable" for="lastName">Last
-						Name</label>
-					<div class="col-md-7">
-						<form:input type="text" path="lastName" id="lastName"
-							class="form-control input-sm" />
-						<div class="has-error">
-							<form:errors path="lastName" class="help-inline" />
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label class="col-md-3 control-lable" for="password">Password</label>
+							<div class="col-md-7">
+								<form:input type="password" path="password" id="password"
+									class="form-control input-sm" />
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
 
-			<div class="row">
-				<div class="form-group col-md-12">
-					<label class="col-md-3 control-lable" for="ssoId">Login</label>
-					<div class="col-md-7">
-						<form:input type="text" path="username" id="username"
-							class="form-control input-sm" />
-						<div class="has-error">
-							<form:errors path="username" class="help-inline" />
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label class="col-md-3 control-lable" for="email">Email</label>
+							<div class="col-md-7">
+								<form:input type="text" path="email" id="email"
+									class="form-control input-sm" />
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
 
-			<div class="row">
-				<div class="form-group col-md-12">
-					<label class="col-md-3 control-lable" for="password">Password</label>
-					<div class="col-md-7">
-						<form:input type="password" path="password" id="password"
-							class="form-control input-sm" />
-						<div class="has-error">
-							<form:errors path="password" class="help-inline" />
+
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label class="col-md-3 control-lable" for="userProfiles">Roles</label>
+							<div class="col-md-7">
+								<form:select class="form-control" path="userProfiles"
+									items="${roles}" multiple="true" itemValue="id"
+									itemLabel="type" id="roles" />
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
 
-			<div class="row">
-				<div class="form-group col-md-12">
-					<label class="col-md-3 control-lable" for="email">Email</label>
-					<div class="col-md-7">
-						<form:input type="text" path="email" id="email"
-							class="form-control input-sm" />
-						<div class="has-error">
-							<form:errors path="email" class="help-inline" />
+					<div class="row">
+						<div class="form-actions floatRight">
+							<input type="submit" value="Register"
+								class="btn btn-primary btn-sm"> <a
+								class="btn btn-info btn-sm" href="<c:url value='/admin' />">Cancel</a>
 						</div>
 					</div>
-				</div>
+				</form:form>
 			</div>
-
-
-			<div class="row">
-				<div class="form-group col-md-12">
-					<label class="col-md-3 control-lable" for="userProfiles">Roles</label>
-					<div class="col-md-7">
-						<form:select path="userProfiles" items="${roles}" multiple="true"
-							itemValue="id" itemLabel="type" class="form-control input-sm" />
-						<div class="has-error">
-							<form:errors path="userProfiles" class="help-inline" />
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="form-actions floatRight">
-					<input type="submit" value="Register"
-						class="btn btn-primary btn-sm"> <a
-						class="btn btn-info btn-sm"
-						href="<c:url value='/admin' />">Cancel</a>
-				</div>
-			</div>
-		</form:form>
+		</div>
 	</div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="static/js/bootstrap.min.js"></script>
 </body>
 </html>

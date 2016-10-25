@@ -10,6 +10,22 @@
 <link href="<c:url value='static/css/bootstrap.min.css' />"
 	rel="stylesheet"></link>
 <link href="<c:url value='static/css/navbar.css' />" rel="stylesheet"></link>
+<script type="text/javascript">
+	function dovalidations() {
+		$("#result").text("");
+		var username = document.getElementById("username").value;
+		if (parseInt(username.length) < 4) {
+			$("#result").text("Username must be at least 4 chars");
+			return false;
+		}
+		var password = document.getElementById("password").value;
+		if (parseInt(password.length) < 4) {
+			$("#result").text('Password must be at least 4 chars');
+			return false;
+		}
+		return true;
+	}
+</script>
 </head>
 <body>
 	<div class="container">
@@ -27,18 +43,21 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li><a href="<c:url value="/index" />">Home</a></li>
+						<li class="active"><a href="<c:url value="/index" />">Home</a></li>
+						<li class="active"><a href="<c:url value="/logged" />">User</a></li>
+						<li class="active"><a href="<c:url value="/admin" />">Admin</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="<c:url value="/register" />">Register</a></li>
+						<li><a href="<c:url value="/index" />">Back</a></li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 
 		<div class="jumbotron">
-			<!--<c:url var="loginUrl" value="/login" /> nie wiem do czego potrzebne-->
-			<form action="${loginUrl}" method="post" class="form-horizontal">
+			<c:url var="loginUrl" value="/login" />
+			<form action="${loginUrl}" method="post" class="form-horizontal"
+				onsubmit="return dovalidations()">
 				<c:if test="${param.error != null}">
 					<div class="alert alert-danger">
 						<p>Invalid username and password.</p>
@@ -49,6 +68,7 @@
 						<p>You have been logged out successfully.</p>
 					</div>
 				</c:if>
+				<p id='result'></p>
 				<div class="form-group">
 					<label for="inputUsername" class="col-sm-2 control-label">Username</label>
 					<div class="col-sm-10">
@@ -65,18 +85,17 @@
 				</div>
 				<input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token}" />
-
-				<div class="form-actions">
-					<input type="submit" class="btn btn-block btn-primary btn-default"
-						value="Log in"> <a
-						class="btn btn-block btn-info btn-default"
-						href="<c:url value='/register' />">Register</a>
+				<div class="span7 text-center">
+					<div class="form-actions">
+						<input type="submit" class="btn btn-primary btn-default"
+							value="Log in">
+					</div>
 				</div>
 			</form>
 		</div>
 	</div>
 	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script src="static/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -69,7 +69,7 @@ public class AppController {
 		return "redirect:/login?logout";
 	}
 
-	@RequestMapping(value = "/newUser", method = RequestMethod.GET)
+	@RequestMapping(value = "/newuser", method = RequestMethod.GET)
 	public String newRegistration(ModelMap model) {
 		User user = new User();
 		model.addAttribute("user", user);
@@ -80,7 +80,7 @@ public class AppController {
 	 * This method will be called on form submission, handling POST request It
 	 * also validates the user input
 	 */
-	@RequestMapping(value = "/newUser", method = RequestMethod.POST)
+	@RequestMapping(value = "/newuser", method = RequestMethod.POST)
 	public String saveRegistration(@Valid User user, BindingResult result, ModelMap model) {
 
 		if (result.hasErrors()) {
@@ -89,40 +89,6 @@ public class AppController {
 		}
 		userService.save(user);
 
-		System.out.println("First Name : " + user.getFirstName());
-		System.out.println("Last Name : " + user.getLastName());
-		System.out.println("SSO ID : " + user.getUsername());
-		System.out.println("Password : " + user.getPassword());
-		System.out.println("Email : " + user.getEmail());
-		System.out.println("Checking UsrProfiles....");
-		if (user.getUserProfiles() != null) {
-			for (UserProfile profile : user.getUserProfiles()) {
-				System.out.println("Profile : " + profile.getType());
-			}
-		}
-
-		model.addAttribute("success", "User " + user.getFirstName() + " has been registered successfully");
-		return "registrationsuccess";
-	}
-
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String newRegister(ModelMap model) {
-		User user = new User();
-		model.addAttribute("user", user);
-		return "register";
-	}
-
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String saveRegister(@Valid User user, BindingResult result, ModelMap model) {
-
-		if (result.hasErrors()) {
-			System.out.println("There are errors");
-			return "newuser";
-		}
-		userService.save(user);
-
-		System.out.println("First Name : " + user.getFirstName());
-		System.out.println("Last Name : " + user.getLastName());
 		System.out.println("Login : " + user.getUsername());
 		System.out.println("Password : " + user.getPassword());
 		System.out.println("Email : " + user.getEmail());
@@ -133,9 +99,8 @@ public class AppController {
 			}
 		}
 
-		// model.addAttribute("success", "User " + user.getFirstName() + " has
-		// been registered successfully");
-		return "login";
+		model.addAttribute("success", "User " + user.getUsername() + " has been registered successfully");
+		return "registrationsuccess";
 	}
 
 	private String getPrincipal() {

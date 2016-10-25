@@ -28,25 +28,28 @@
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="<c:url value="/index" />">Home</a></li>
+						<li class="active"><a href="<c:url value="/logged" />">User</a></li>
+						<li class="active"><a href="<c:url value="/admin" />">Admin</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="<c:url value="/login" />">Login</a></li>
-						<li><a href="<c:url value="/register" />">Register</a></li>
+						<li><a href="<c:url value="/logout" />">Logout</a></li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 
 		<div class="jumbotron">
-			<h1>Index page for all.</h1>
-			<p>Page available for non logged in users.</p>
+			<h2>Index page</h2>
+			<p>Go to login page, only admin can add new users and select
+				their roles.</p>
 		</div>
 	</div>
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script src="static/js/bootstrap.min.js"></script>
 </body>
 </html>
