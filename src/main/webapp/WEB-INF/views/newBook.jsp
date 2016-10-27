@@ -13,33 +13,16 @@
 	rel="stylesheet"></link>
 <link href="<c:url value='static/css/navbar.css' />" rel="stylesheet"></link>
 <script type="text/javascript">
-	function validateEmail(email) {
-		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-		return re.test(email);
-	}
 	function dovalidations() {
 		$("#result").text("");
-		var username = document.getElementById("username").value;
-		if (parseInt(username.length) < 4) {
-			$("#result").text("Username must be at least 4 chars");
+		var username = document.getElementById("author").value;
+		if (parseInt(username.length) < 1) {
+			$("#result").text("Author cant be blank");
 			return false;
 		}
-		var password = document.getElementById("password").value;
-		if (parseInt(password.length) < 4) {
-			$("#result").text("Password must be at least 4 chars");
-			return false;
-		}
-
-		var email = document.getElementById("email").value;
-		if (validateEmail(email)) {
-		} else {
-			$("#result").text(email + " is not valid e-mail");
-			return false;
-		}
-
-		var roles = document.getElementById("roles").value;
-		if (roles == "") {
-			$("#result").text("Select one role.");
+		var password = document.getElementById("title").value;
+		if (parseInt(password.length) < 1) {
+			$("#result").text("Title cant be blank");
 			return false;
 		}
 		return true;
@@ -74,17 +57,18 @@
 		</nav>
 		<div class="jumbotron">
 			<div class="form-container">
-				<h2>New User Registration Form</h2>
+				<h2>Add new book</h2>
 				<br>
 				<p id='result'></p>
-				<form:form method="POST" modelAttribute="user"
+				<form:form method="POST" modelAttribute="book"
 					class="form-horizontal" onsubmit="return dovalidations()">
+					<form:input type="hidden" path="id" id="id" />
 
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-3 control-lable" for="username">Username</label>
+							<label class="col-md-3 control-lable" for="author">Author</label>
 							<div class="col-md-7">
-								<form:input type="text" path="username" id="username"
+								<form:input type="text" path="author" id="author"
 									class="form-control input-sm" />
 							</div>
 						</div>
@@ -92,9 +76,9 @@
 
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-3 control-lable" for="password">Password</label>
+							<label class="col-md-3 control-lable" for="title">Title</label>
 							<div class="col-md-7">
-								<form:input type="password" path="password" id="password"
+								<form:input type="text" path="title" id="title"
 									class="form-control input-sm" />
 							</div>
 						</div>
@@ -102,32 +86,31 @@
 
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-3 control-lable" for="email">Email</label>
+							<label class="col-md-3 control-lable" for="available">Available</label>
 							<div class="col-md-7">
-								<form:input type="text" path="email" id="email"
-									class="form-control input-sm" />
+								<form:select class="form-control" path="available"
+									id="available">
+									<option value="TRUE">TRUE</option>
+									<option value="FALSE">FALSE</option>
+								</form:select>
 							</div>
 						</div>
 					</div>
 
-
-					<div class="row">
-						<div class="form-group col-md-12">
-							<label class="col-md-3 control-lable" for="userProfiles">Roles</label>
-							<div class="col-md-7">
-								<form:select class="form-control" path="userProfiles"
-									items="${roles}" multiple="false" itemValue="id"
-									itemLabel="type" id="roles" />
-							</div>
-						</div>
-					</div>
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
 					<div class="row">
 						<div class="form-actions floatRight">
-							<input type="submit" value="Register"
-								class="btn btn-primary btn-sm"> <a
-								class="btn btn-info btn-sm" href="<c:url value='/admin' />">Cancel</a>
+							<c:choose>
+								<c:when test="${edit}">
+									<input class="btn btn-info" type="submit" value="Update" />
+									<a class="btn btn-primary" href="<c:url value='/books' />">Back</a>
+								</c:when>
+								<c:otherwise>
+									<input class="btn btn-info" type="submit" value="Add book" />
+									<a class="btn btn-primary" href="<c:url value='/books' />">Back</a>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 				</form:form>

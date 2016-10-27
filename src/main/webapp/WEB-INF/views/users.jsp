@@ -6,10 +6,29 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>You are logged in</title>
+<title>List of Users</title>
 <link href="<c:url value='static/css/bootstrap.min.css' />"
 	rel="stylesheet"></link>
 <link href="<c:url value='static/css/navbar.css' />" rel="stylesheet"></link>
+<script type="text/javascript">
+	function deleteUser(id) {
+		id = id.split("_")[1];
+		$.ajax({
+			url : "${pageContext.request.contextPath}/deleteProduct",
+			type : "post",
+			data : "productId=" + id,
+			success : function(response) {
+				var table = document.getElementById("productTable");
+				var tr = document.getElementById("tr_" + id);
+				table.deleteRow(tr.rowIndex);
+				alert(response);
+			},
+			error : function(error) {
+				alert(error);
+			}
+		});
+	}
+</script>
 </head>
 <body>
 	<div class="container">
@@ -38,11 +57,31 @@
 			</div>
 		</nav>
 		<div class="jumbotron">
-			<h2>Welcome ${user}, to page for ADMIN.</h2>
-			<br> <a class="btn btn-info btn-lg btn-block"
-				href="<c:url value='/users' />">View Users list</a><br> <a
-				class="btn btn-success btn-lg btn-block"
-				href="<c:url value='/books' />">View Books list</a>
+			<table class="table table-striped">
+				<tr>
+					<th>ID</th>
+					<th>Username</th>
+					<th>E-mail</th>
+					<th>Delete user</th>
+					<th>Edit user</th>
+				</tr>
+				<c:forEach items="${allUsers }" var="user">
+					<tr id="tr_${user.id}">
+						<td>${user.id }</td>
+						<td>${user.username }</td>
+						<td>${user.email }</td>
+						<td><input type="button" class="btn btn-danger btn-xs"
+							style="width: 90px" value="Delete" id="btn_${user.id }"
+							onclick="deleteUser(this.id)"></input></td>
+						<td><input type="button" class="btn btn-info btn-xs"
+							style="width: 90px" value="Edit" id="btn_${user.id }"
+							onclick="updateUser(this.id)"></input></td>
+					</tr>
+				</c:forEach>
+			</table>
+			<a class="btn btn-primary btn-block" href="<c:url value='/newuser' />">Add
+				new user</a><a class="btn btn-warning btn-block"
+				href="<c:url value='/admin' />">Back</a>
 		</div>
 	</div>
 	<script

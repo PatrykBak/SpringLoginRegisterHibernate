@@ -38,11 +38,23 @@
 			</div>
 		</nav>
 		<div class="jumbotron">
-			<p>Hello : ${user}, This is a welcome page for users with role
-				USER.</p>
+			<h2>Hello : ${user}, This is a welcome page for logged in users.</h2>
+			<br>
+			<p>List of available books</p>
+			<table class="table table-striped">
+				<tr>
+					<th>Author</th>
+					<th>Title</th>
+				</tr>
+				<c:forEach items="${allBooks }" var="book">
+					<tr>
+						<td>${book.author }</td>
+						<td>${book.title }</td>
+					</tr>
+				</c:forEach>
+			</table>
 		</div>
 	</div>
-	<
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script src="static/js/bootstrap.min.js"></script>

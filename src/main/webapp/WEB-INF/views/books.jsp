@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>You are logged in</title>
+<title>List of Books</title>
 <link href="<c:url value='static/css/bootstrap.min.css' />"
 	rel="stylesheet"></link>
 <link href="<c:url value='static/css/navbar.css' />" rel="stylesheet"></link>
@@ -38,11 +38,31 @@
 			</div>
 		</nav>
 		<div class="jumbotron">
-			<h2>Welcome ${user}, to page for ADMIN.</h2>
-			<br> <a class="btn btn-info btn-lg btn-block"
-				href="<c:url value='/users' />">View Users list</a><br> <a
-				class="btn btn-success btn-lg btn-block"
-				href="<c:url value='/books' />">View Books list</a>
+			<table class="table table-striped" id="booksTable">
+				<tr>
+					<th>ID</th>
+					<th>Author</th>
+					<th>Title</th>
+					<th>Available</th>
+					<th>Delete book</th>
+					<th>Edit book</th>
+				</tr>
+				<c:forEach items="${allBooks }" var="book">
+					<tr id="tr_${book.id}">
+						<td>${book.id }</td>
+						<td>${book.author }</td>
+						<td>${book.title }</td>
+						<td>${book.available }</td>
+						<td><a class="btn btn-danger btn-xs" style="width: 90px"
+							href="<c:url value='/delete-${book.id}-book' />">Delete</a>
+						<td><a class="btn btn-info btn-xs" style="width: 90px"
+							href="<c:url value='/edit-${book.id}-book' />">Edit</a>
+					</tr>
+				</c:forEach>
+			</table>
+			<br /> <a class="btn btn-primary btn-block"
+				href="<c:url value='/newBook' />">Add New Book</a><a
+				class="btn btn-warning btn-block" href="<c:url value='/admin' />">Back</a>
 		</div>
 	</div>
 	<script

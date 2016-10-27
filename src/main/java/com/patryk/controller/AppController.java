@@ -15,11 +15,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.patryk.model.Book;
 import com.patryk.model.User;
 import com.patryk.model.UserProfile;
+import com.patryk.service.BookService;
 import com.patryk.service.UserProfileService;
 import com.patryk.service.UserService;
 
@@ -31,6 +34,8 @@ public class AppController {
 
 	@Autowired
 	UserService userService;
+	@Autowired
+	BookService bookService;
 
 	@RequestMapping(value = { "/", "/index", "/home" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
@@ -40,6 +45,7 @@ public class AppController {
 	@RequestMapping(value = { "/logged" }, method = RequestMethod.GET)
 	public String loggedPage(ModelMap model) {
 		model.addAttribute("user", getPrincipal());
+		model.addAttribute("allBooks", bookService.findAvailable("TRUE"));
 		return "logged";
 	}
 
@@ -88,7 +94,6 @@ public class AppController {
 			return "newuser";
 		}
 		userService.save(user);
-
 		System.out.println("Login : " + user.getUsername());
 		System.out.println("Password : " + user.getPassword());
 		System.out.println("Email : " + user.getEmail());
@@ -98,9 +103,63 @@ public class AppController {
 				System.out.println("Profile : " + profile.getType());
 			}
 		}
+		return "redirect:/users";
+	}
 
-		model.addAttribute("success", "User " + user.getUsername() + " has been registered successfully");
-		return "registrationsuccess";
+	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	public String usersPage(ModelMap model) {
+		model.addAttribute("allUsers", userService.findAllUsers());
+		return "users";
+	}
+
+	@RequestMapping(value = "/books", method = RequestMethod.GET)
+	public String booksPage(ModelMap model) {
+		model.addAttribute("allBooks", bookService.findAllBooks());
+		return "books";
+	}
+
+	@RequestMapping(value = { "/newBook" }, method = RequestMethod.GET)
+	public String newBook(ModelMap model) {
+		Book book = new Book();
+		model.addAttribute("book", book);
+		model.addAttribute("edit", false);
+		return "newBook";
+	}
+
+	@RequestMapping(value = { "/newBook" }, method = RequestMethod.POST)
+	public String saveEmployee(Book book, BindingResult result, ModelMap model) {
+		if (result.hasErrors()) {
+			return "newBook";
+		}
+		bookService.save(book);
+		return "redirect:/books";
+	}
+
+	@RequestMapping(value = { "/edit-{id}-book" }, method = RequestMethod.GET)
+	public String editBook(@PathVariable Integer id, ModelMap model) {
+		Book book = bookService.findById(id);
+		model.addAttribute("book", book);
+		model.addAttribute("edit", true);
+		return "newBook";
+	}
+
+	@RequestMapping(value = { "/edit-{id}-book" }, method = RequestMethod.POST)
+	public String updateBook(Book book, BindingResult result, ModelMap model, @PathVariable Integer id) {
+
+		if (result.hasErrors()) {
+			return "newBook";
+		}
+		bookService.updateBook(book);
+		return "redirect:/books";
+	}
+
+	/*
+	 * This method will delete an employee by it's SSN value.
+	 */
+	@RequestMapping(value = { "/delete-{id}-book" }, method = RequestMethod.GET)
+	public String deleteBook(@PathVariable Integer id) {
+		bookService.deleteBookById(id);
+		return "redirect:/books";
 	}
 
 	private String getPrincipal() {

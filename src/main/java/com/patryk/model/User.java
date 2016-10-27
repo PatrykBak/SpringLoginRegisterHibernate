@@ -36,10 +36,6 @@ public class User {
 	@Column(name = "EMAIL", nullable = false)
 	private String email;
 
-	@NotEmpty
-	@Column(name = "STATE", nullable = false)
-	private String state = State.ACTIVE.getState();
-
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "APP_USER_USER_PROFILE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = {
 			@JoinColumn(name = "USER_PROFILE_ID") })
@@ -75,14 +71,6 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
 	}
 
 	public Set<UserProfile> getUserProfiles() {
@@ -123,8 +111,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", state="
-				+ state + ", userProfiles=" + userProfiles + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
+				+ ", userProfiles=" + userProfiles + "]";
 	}
 
 }

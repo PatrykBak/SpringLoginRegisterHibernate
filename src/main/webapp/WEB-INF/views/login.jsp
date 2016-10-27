@@ -58,7 +58,8 @@
 			<c:url var="loginUrl" value="/login" />
 			<form action="${loginUrl}" method="post" class="form-horizontal"
 				onsubmit="return dovalidations()">
-				<c:if test="${param.error != null}">
+				<c:if
+					test="${not empty sessionScope.SPRING_SECURITY_LAST_EXCEPTION}">
 					<div class="alert alert-danger">
 						<p>Invalid username and password.</p>
 					</div>
@@ -83,8 +84,10 @@
 							name="password" placeholder="Enter Password" required>
 					</div>
 				</div>
+
 				<input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token}" />
+
 				<div class="span7 text-center">
 					<div class="form-actions">
 						<input type="submit" class="btn btn-primary btn-default"
