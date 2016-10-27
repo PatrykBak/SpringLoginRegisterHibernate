@@ -38,7 +38,7 @@
 			</div>
 		</nav>
 		<div class="jumbotron">
-			<table class="table table-striped" id="booksTable">
+			<table class="table table-striped">
 				<tr>
 					<th>ID</th>
 					<th>Author</th>
@@ -48,7 +48,7 @@
 					<th>Edit book</th>
 				</tr>
 				<c:forEach items="${allBooks }" var="book">
-					<tr id="tr_${book.id}">
+					<tr>
 						<td>${book.id }</td>
 						<td>${book.author }</td>
 						<td>${book.title }</td>

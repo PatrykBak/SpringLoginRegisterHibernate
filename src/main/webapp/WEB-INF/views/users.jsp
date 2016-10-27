@@ -10,25 +10,6 @@
 <link href="<c:url value='static/css/bootstrap.min.css' />"
 	rel="stylesheet"></link>
 <link href="<c:url value='static/css/navbar.css' />" rel="stylesheet"></link>
-<script type="text/javascript">
-	function deleteUser(id) {
-		id = id.split("_")[1];
-		$.ajax({
-			url : "${pageContext.request.contextPath}/deleteProduct",
-			type : "post",
-			data : "productId=" + id,
-			success : function(response) {
-				var table = document.getElementById("productTable");
-				var tr = document.getElementById("tr_" + id);
-				table.deleteRow(tr.rowIndex);
-				alert(response);
-			},
-			error : function(error) {
-				alert(error);
-			}
-		});
-	}
-</script>
 </head>
 <body>
 	<div class="container">
@@ -66,22 +47,20 @@
 					<th>Edit user</th>
 				</tr>
 				<c:forEach items="${allUsers }" var="user">
-					<tr id="tr_${user.id}">
+					<tr>
 						<td>${user.id }</td>
 						<td>${user.username }</td>
 						<td>${user.email }</td>
-						<td><input type="button" class="btn btn-danger btn-xs"
-							style="width: 90px" value="Delete" id="btn_${user.id }"
-							onclick="deleteUser(this.id)"></input></td>
-						<td><input type="button" class="btn btn-info btn-xs"
-							style="width: 90px" value="Edit" id="btn_${user.id }"
-							onclick="updateUser(this.id)"></input></td>
+						<td><a class="btn btn-danger btn-xs" style="width: 90px"
+							href="<c:url value='/delete-${user.id}-user' />">Delete</a>
+						<td><a class="btn btn-info btn-xs" style="width: 90px"
+							href="<c:url value='/edit-${user.id}-user' />">Edit</a>
 					</tr>
 				</c:forEach>
 			</table>
-			<a class="btn btn-primary btn-block" href="<c:url value='/newuser' />">Add
-				new user</a><a class="btn btn-warning btn-block"
-				href="<c:url value='/admin' />">Back</a>
+			<br /> <a class="btn btn-primary btn-block"
+				href="<c:url value='/newuser' />">Add new user</a><a
+				class="btn btn-warning btn-block" href="<c:url value='/admin' />">Back</a>
 		</div>
 	</div>
 	<script

@@ -6,14 +6,15 @@
 
 	<http auto-config="true">
 		<intercept-url pattern="/" access="permitAll" />
-		<intercept-url pattern="/index" access="permitAll" />
-		<intercept-url pattern="/register" access="permitAll" />
-		<intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
-		<intercept-url pattern="/newuser" access="hasRole('ADMIN')" />
+		<intercept-url pattern="/logged" access="hasRole('USER') or hasRole('ADMIN')" />
+		<intercept-url pattern="/admin" access="hasRole('ADMIN')" />
+		<intercept-url pattern="/books" access="hasRole('ADMIN')" />
+		<intercept-url pattern="/users" access="hasRole('ADMIN')" />
+		<intercept-url pattern="/newUser" access="hasRole('ADMIN')" />
 
 		<form-login login-page="/login" username-parameter="ssoId"
 			password-parameter="password" authentication-success-handler-ref="customSuccessHandler" />
-		<access-denied-handler error-page="/Access_Denied" />
+		<access-denied-handler error-page="/accessDenied" />
 		<csrf />
 	</http>
 

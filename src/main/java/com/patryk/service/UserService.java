@@ -5,7 +5,7 @@ import java.util.List;
 import com.patryk.model.User;
 
 public interface UserService {
-//korzysta z dao
+
 	void save(User user);
 
 	User findById(int id);
@@ -13,4 +13,8 @@ public interface UserService {
 	User findBySso(String sso);
 
 	public List<User> findAllUsers();
+
+	public void updateUser(User user);
+
+	public void deleteUserById(Integer id);
 }

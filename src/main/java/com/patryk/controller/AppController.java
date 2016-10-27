@@ -112,6 +112,30 @@ public class AppController {
 		return "users";
 	}
 
+	@RequestMapping(value = { "/edit-{id}-user" }, method = RequestMethod.GET)
+	public String editUser(@PathVariable Integer id, ModelMap model) {
+		User user = userService.findById(id);
+		model.addAttribute("user", user);
+		model.addAttribute("edit", true);
+		return "newuser";
+	}
+
+	@RequestMapping(value = { "/edit-{id}-user" }, method = RequestMethod.POST)
+	public String updateUser(User user, BindingResult result, ModelMap model, @PathVariable Integer id) {
+
+		if (result.hasErrors()) {
+			return "newuser";
+		}
+		userService.updateUser(user);
+		return "redirect:/users";
+	}
+
+	@RequestMapping(value = { "/delete-{id}-user" }, method = RequestMethod.GET)
+	public String deleteUser(@PathVariable Integer id) {
+		userService.deleteUserById(id);
+		return "redirect:/users";
+	}
+
 	@RequestMapping(value = "/books", method = RequestMethod.GET)
 	public String booksPage(ModelMap model) {
 		model.addAttribute("allBooks", bookService.findAllBooks());
@@ -153,9 +177,6 @@ public class AppController {
 		return "redirect:/books";
 	}
 
-	/*
-	 * This method will delete an employee by it's SSN value.
-	 */
 	@RequestMapping(value = { "/delete-{id}-book" }, method = RequestMethod.GET)
 	public String deleteBook(@PathVariable Integer id) {
 		bookService.deleteBookById(id);
