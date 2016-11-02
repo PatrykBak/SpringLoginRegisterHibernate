@@ -1,13 +1,10 @@
 Spring application that uses:
 
-Hibernate framework for connecting with MySQL database
+- Hibernate framework for connecting with MySQL database
 
-Spring Security framework
+- Spring Security framework
 
-Bootstrap
-
-
-
+- Bootstrap
 
 App was created using Spring Tool Suite.
 
