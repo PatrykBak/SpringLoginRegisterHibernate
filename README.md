@@ -12,4 +12,4 @@ USER after login can view books available for them.
 
 ADMIN can add, edit, delete users and also can manage books.
 
-[a link](http://springsecurity-springsecurity.44fs.preview.openshiftapps.com/SpringLoginRegisterHibernate)
+[Link to website](http://springsecurity-springsecurity.44fs.preview.openshiftapps.com/SpringLoginRegisterHibernate)
