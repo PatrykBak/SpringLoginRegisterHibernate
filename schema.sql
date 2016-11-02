@@ -1,7 +1,7 @@
 CREATE DATABASE baza;
 USE baza;
 
-create table APP_USER (
+CREATE TABLE APP_USER (
    id BIGINT NOT NULL AUTO_INCREMENT,
    username VARCHAR(30) NOT NULL,
    password VARCHAR(100) NOT NULL,
@@ -10,14 +10,13 @@ create table APP_USER (
    UNIQUE (username)
 );
    
-create table USER_PROFILE(
+CREATE TABLE USER_PROFILE(
    id BIGINT NOT NULL AUTO_INCREMENT,
    type VARCHAR(30) NOT NULL,
    PRIMARY KEY (id),
    UNIQUE (type)
 );
-  
-/* JOIN TABLE for MANY-TO-MANY relationship*/  
+
 CREATE TABLE APP_USER_USER_PROFILE (
     user_id BIGINT NOT NULL,
     user_profile_id BIGINT NOT NULL,
@@ -42,7 +41,7 @@ VALUES ('user','$2a$10$ZrtC093F4L3P4X7kHRFIEuN.pv0PmfqRqIfWvdyoDU0JxO.NV9RYC','u
 /* Populate JOIN Table */
 INSERT INTO APP_USER_USER_PROFILE (user_id, user_profile_id)
   SELECT user.id, profile.id FROM app_user user, user_profile profile
-  where user.username='admin' and profile.type='ADMIN';
+  WHERE user.username='admin' and profile.type='ADMIN';
 
  
 CREATE TABLE `books` (
