@@ -52,8 +52,6 @@
 				USER after login can view books available for them. <br> ADMIN
 				can add, edit, delete users and also can manage books.
 			</p>
-
-
 			<p>
 				User credentials login: user password: user<br> Admin
 				credentials login: admin password: admin
