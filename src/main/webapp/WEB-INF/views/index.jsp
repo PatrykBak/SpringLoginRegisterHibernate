@@ -40,12 +40,30 @@
 		</nav>
 
 		<div class="jumbotron">
-			<h2>Index page</h2>
-			<p>Go to login page. Users after login can view books available for them. 
-			Admin can view, edit, delete and add books. Also can add new user, edit users and delete users.
-			
-			User credentials login: user password: user
-			Admin credentials login: admin  password: admin</p>
+			<p>Spring application that uses:</p>
+			<ul class="list-group">
+				<li class="list-group-item">Hibernate framework for connecting
+					with MySQL database</li>
+				<li class="list-group-item">Spring Security framework</li>
+				<li class="list-group-item">Bootstrap</li>
+			</ul>
+			<p>App was created using Spring Tool Suite.</p>
+			<p>
+				USER after login can view books available for them. <br> ADMIN
+				can add, edit, delete users and also can manage books.
+			</p>
+
+
+			<p>
+				User credentials login: user password: user<br> Admin
+				credentials login: admin password: admin
+			</p>
+			<p>
+				<a href="<c:url value="/login" />">Go to login page.</a><br> <a
+					target="_blank"
+					href="<c:url value="https://github.com/PatrykBak/SpringLoginRegisterHibernate" />">Source
+					code on GitHub.</a>
+			</p>
 		</div>
 	</div>
 	<!-- Bootstrap core JavaScript
