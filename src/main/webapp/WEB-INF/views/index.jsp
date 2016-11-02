@@ -41,8 +41,11 @@
 
 		<div class="jumbotron">
 			<h2>Index page</h2>
-			<p>Go to login page, only admin can add new users and select
-				their roles.</p>
+			<p>Go to login page. Users after login can view books available for them. 
+			Admin can view, edit, delete and add books. Also can add new user, edit users and delete users.
+			
+			User credentials login: user password: user
+			Admin credentials login: admin  password: admin</p>
 		</div>
 	</div>
 	<!-- Bootstrap core JavaScript
