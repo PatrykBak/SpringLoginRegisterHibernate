@@ -40,7 +40,7 @@
 		<div class="jumbotron">
 			<h2>Hello : ${user}, This is a welcome page for logged in users.</h2>
 			<br>
-			<p>List of available books</p>
+			<p>List of available books: </p>
 			<table class="table table-striped">
 				<tr>
 					<th>Author</th>
