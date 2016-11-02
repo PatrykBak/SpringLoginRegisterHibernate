@@ -14,7 +14,7 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name = "AUTHOR", unique = true, nullable = false)
+	@Column(name = "AUTHOR", nullable = false)
 	private String author;
 
 	@Column(name = "TITLE", nullable = false)
@@ -53,5 +53,38 @@ public class Book {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + ((author == null) ? 0 : author.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Book))
+			return false;
+		Book other = (Book) obj;
+		if (id != other.id)
+			return false;
+		if (author == null) {
+			if (other.author != null)
+				return false;
+		} else if (!author.equals(other.author))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", author=" + author + ", title=" + title + "]";
 	}
 }

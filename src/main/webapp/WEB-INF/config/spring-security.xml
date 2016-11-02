@@ -12,7 +12,7 @@
 		<intercept-url pattern="/users" access="hasRole('ADMIN')" />
 		<intercept-url pattern="/newUser" access="hasRole('ADMIN')" />
 
-		<form-login login-page="/login" username-parameter="ssoId"
+		<form-login login-page="/login" username-parameter="username"
 			password-parameter="password" authentication-success-handler-ref="customSuccessHandler" />
 		<access-denied-handler error-page="/accessDenied" />
 		<csrf />
@@ -20,7 +20,6 @@
 
 	<beans:bean id="bcryptEncoder"
 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
-
 
 	<authentication-manager>
 		<authentication-provider user-service-ref="customUserDetailsService">

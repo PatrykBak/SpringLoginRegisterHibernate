@@ -12,7 +12,7 @@
 		<intercept-url pattern="/users" access="hasRole('ADMIN')" />
 		<intercept-url pattern="/newUser" access="hasRole('ADMIN')" />
 
-		<form-login login-page="/login" username-parameter="ssoId"
+		<form-login login-page="/login" username-parameter="username"
 			password-parameter="password" authentication-success-handler-ref="customSuccessHandler" />
 		<access-denied-handler error-page="/accessDenied" />
 		<csrf />

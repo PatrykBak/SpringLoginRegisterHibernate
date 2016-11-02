@@ -3,11 +3,13 @@ com\patryk\dao\UserDaoImpl.class
 com\patryk\dao\BookDao.class
 com\patryk\service\BookService.class
 com\patryk\service\UserProfileServiceImpl.class
+com\patryk\controller\UserController.class
 com\patryk\dao\UserProfileDaoImpl.class
 com\patryk\dao\UserProfileDao.class
 com\patryk\service\CustomUserDetailsService.class
 com\patryk\util\RoleToUserProfileConverter.class
 com\patryk\dao\BookDaoImpl.class
+com\patryk\controller\BooksController.class
 com\patryk\dao\AbstractDao.class
 com\patryk\model\User.class
 com\patryk\service\BookServiceImpl.class

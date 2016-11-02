@@ -74,11 +74,12 @@
 		</nav>
 		<div class="jumbotron">
 			<div class="form-container">
-				<h2>New User Registration Form</h2>
+				<h2>Add New User</h2>
 				<br>
 				<p id='result'></p>
 				<form:form method="POST" modelAttribute="user"
 					class="form-horizontal" onsubmit="return dovalidations()">
+					<form:input type="hidden" path="id" id="id" />
 
 					<div class="row">
 						<div class="form-group col-md-12">
@@ -125,9 +126,16 @@
 						value="${_csrf.token}" />
 					<div class="row">
 						<div class="form-actions floatRight">
-							<input type="submit" value="Register"
-								class="btn btn-primary btn-sm"> <a
-								class="btn btn-info btn-sm" href="<c:url value='/admin' />">Cancel</a>
+							<c:choose>
+								<c:when test="${edit}">
+									<input class="btn btn-info" type="submit" value="Update" />
+									<a class="btn btn-primary" href="<c:url value='/users' />">Back</a>
+								</c:when>
+								<c:otherwise>
+									<input class="btn btn-info" type="submit" value="Add user" />
+									<a class="btn btn-primary" href="<c:url value='/users' />">Back</a>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 				</form:form>

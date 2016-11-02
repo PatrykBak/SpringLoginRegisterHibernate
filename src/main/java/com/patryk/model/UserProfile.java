@@ -8,15 +8,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="USER_PROFILE")
+@Table(name = "USER_PROFILE")
 public class UserProfile {
 
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
-	@Column(name="TYPE", length=15, unique=true, nullable=false)
+	@Column(name = "TYPE", unique = true, nullable = false)
 	private String type = UserProfileType.USER.getUserProfileType();
-	
+
 	public int getId() {
 		return id;
 	}
@@ -32,7 +33,6 @@ public class UserProfile {
 	public void setType(String type) {
 		this.type = type;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -64,8 +64,6 @@ public class UserProfile {
 
 	@Override
 	public String toString() {
-		return "UserProfile [id=" + id + ",  type=" + type	+ "]";
+		return "UserProfile [id=" + id + ",  type=" + type + "]";
 	}
-	
-
 }

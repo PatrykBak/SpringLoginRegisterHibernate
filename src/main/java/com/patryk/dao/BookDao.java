@@ -1,7 +1,6 @@
 package com.patryk.dao;
 
 import java.util.List;
-
 import com.patryk.model.Book;
 
 public interface BookDao {

@@ -1,6 +1,8 @@
 C:\STSworkspace\SpringLoginRegisterHibernate\src\main\java\com\patryk\configuration\CustomSuccessHandler.java
 C:\STSworkspace\SpringLoginRegisterHibernate\src\main\java\com\patryk\dao\UserProfileDao.java
 C:\STSworkspace\SpringLoginRegisterHibernate\src\main\java\com\patryk\service\UserServiceImpl.java
+C:\STSworkspace\SpringLoginRegisterHibernate\src\main\java\com\patryk\controller\BooksController.java
+C:\STSworkspace\SpringLoginRegisterHibernate\src\main\java\com\patryk\controller\UserController.java
 C:\STSworkspace\SpringLoginRegisterHibernate\src\main\java\com\patryk\service\UserProfileServiceImpl.java
 C:\STSworkspace\SpringLoginRegisterHibernate\src\main\java\com\patryk\model\Book.java
 C:\STSworkspace\SpringLoginRegisterHibernate\src\main\java\com\patryk\model\User.java

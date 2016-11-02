@@ -10,6 +10,7 @@ import com.patryk.model.Book;
 @Service("bookService")
 @Transactional
 public class BookServiceImpl implements BookService {
+	
 	@Autowired
 	private BookDao dao;
 
@@ -23,6 +24,10 @@ public class BookServiceImpl implements BookService {
 
 	public Book findById(int id) {
 		return dao.findById(id);
+	}
+
+	public void deleteBookById(Integer id) {
+		dao.deleteBookById(id);
 	}
 
 	public List<Book> findAvailable(String available) {
@@ -47,13 +52,4 @@ public class BookServiceImpl implements BookService {
 			entity.setAvailable(book.getAvailable());
 		}
 	}
-
-	public void deleteBookById(Integer id) {
-		dao.deleteBookById(id);
-	}
-
-	// public boolean isEmployeeSsnUnique(Integer id, String ssn) {
-	// Employee employee = findEmployeeBySsn(ssn);
-	// return (employee == null || ((id != null) && (employee.getId() == id)));
-	// }
 }

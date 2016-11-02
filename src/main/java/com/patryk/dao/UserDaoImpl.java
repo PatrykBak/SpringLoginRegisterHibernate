@@ -18,10 +18,9 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		return getByKey(id);
 	}
 
-	// custonUserDetailsService.java - korzysta
-	public User findBySSO(String sso) {
+	public User findByUsername(String username) {
 		Criteria crit = createEntityCriteria();
-		crit.add(Restrictions.eq("username", sso));
+		crit.add(Restrictions.eq("username", username));
 		return (User) crit.uniqueResult();
 	}
 

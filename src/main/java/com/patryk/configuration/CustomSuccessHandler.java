@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -29,7 +27,6 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 			System.out.println("Can't redirect");
 			return;
 		}
-
 		redirectStrategy.sendRedirect(request, response, targetUrl);
 	}
 

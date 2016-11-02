@@ -27,22 +27,12 @@ public class UserServiceImpl implements UserService {
 		return dao.findById(id);
 	}
 
-	public User findBySso(String sso) {
-		return dao.findBySSO(sso);
+	public User findByUsername(String username) {
+		return dao.findByUsername(username);
 	}
 
 	public List<User> findAllUsers() {
 		return dao.findAllUsers();
-	}
-
-	public void updateUser(User user) {
-		User entity = dao.findById(user.getId());
-		if (entity != null) {
-			entity.setUsername(user.getUsername());
-			entity.setPassword(user.getPassword());
-			entity.setEmail(user.getEmail());
-			entity.setUserProfiles(user.getUserProfiles());
-		}
 	}
 
 	public void deleteUserById(Integer id) {
